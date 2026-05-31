@@ -1,13 +1,14 @@
 public class Student {
-    String name;
-    String course;
-    String[] subjects = new String[8];
-    int id;
+    private String name;
+    private String course;
+    private String[] subjects = new String[8];
+    private int id;
 
     //constructors
     public Student(String name, int id){
         this.name = name;
         this.id = id;
+        this.course = "";
     }
 
     public Student(String name, int id, String course){
@@ -18,7 +19,11 @@ public class Student {
 
     //methods
     public void introduce(){
-        String firstName = name.substring(0, name.indexOf(" "));
+        String firstName = this.name;
+
+        if (name.contains(" ")){
+            firstName = name.substring(0, name.indexOf(" "));
+        }
         System.out.println("Hello, I am " + firstName + ". My ID number is " +  id + ". My course is " + course);
     }
 
@@ -46,7 +51,7 @@ public class Student {
         }
 
         if (subjects.length >= maxSubjects) {
-            System.out.println("Max subjects reached.");
+            System.out.println("Your subject list is full!");
             return;
         }
 
@@ -77,8 +82,13 @@ public class Student {
         return id;
     }
 
-    public String[] getSubjects() {
-        return subjects;
+    public String getSubject(int subjectNo){
+        for (int i = 0; i < subjects.length; i++){
+            if (i+1 == subjectNo){
+                return subjects[i];
+            }
+        }
+        return "";
     }
 
     public String getCourse() {
